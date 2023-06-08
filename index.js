@@ -46,7 +46,7 @@ async function fetchBotReply(pitcherPrompt) {
 async function fetchSynopsis(pitcherPrompt) {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: `Generate an engaging, professional and marketable movie synopsis based on a pitcher prompt.
+    prompt: `Generate an engaging, professional and marketable movie synopsis based on a pitcher prompt. Also think about the best suitable actors for the roles you may mention in the synopsis and put the actor's name between parentheses rigth after the charachter name.
     ###
     pitcher_prompt: A big-headed daredevil fighter pilot goes back to school only to be sent on a deadly mission.
     synopsis: The Top Gun Naval Fighter Weapons School is where the best of the best train to refine their elite flying skills. When hotshot fighter pilot Maverick (Tom Cruise) is sent to the school, his reckless attitude and cocky demeanor put him at odds with the other pilots, especially the cool and collected Iceman (Val Kilmer). But Maverick isn't only competing to be the top fighter pilot, he's also fighting for the attention of his beautiful flight instructor, Charlotte Blackwood (Kelly McGillis). Maverick gradually earns the respect of his instructors and peers - and also the love of Charlotte, but struggles to balance his personal and professional life. As the pilots prepare for a mission against a foreign enemy, Maverick must confront his own demons and overcome the tragedies rooted deep in his past to become the best fighter pilot and return from the mission triumphant.
