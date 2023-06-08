@@ -17,6 +17,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
     setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
     fetchBotReply(pitcherPrompt)
+    fetchSynopsis(pitcherPrompt)
   }
 })
 
@@ -27,19 +28,16 @@ async function fetchBotReply(pitcherPrompt) {
     max_tokens: 60
   })
   movieBossText.innerText = response.data.choices[0].text.trim()
-
-  // fetch(url, {
-  //   method: 'POST',
-  //   headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${apiKey}`
-  //   },
-  //   body: JSON.stringify({
-  //       model: 'text-davinci-003',
-  //       prompt: 'Sound enthusiastic in five words or less.'
-  //   })
-  // }).then(response => response.json()).then(data =>
-  //   movieBossText.innerText = data.choices[0].text
-  // )
 }
+
+async function fetchSynopsis(pitcherPrompt) {
+  const response = await openai.createCompletion({
+    model: 'text-davinci-003',
+    prompt: `Generate an engaging, professional and marketable movie synopsis based on the following idea: ${pitcherPrompt}`,
+    max_tokens: 500
+  })
+  movieBossText.innerText = response.data.choices[0].text.trim()
+}
+
+
 
