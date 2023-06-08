@@ -112,7 +112,17 @@ async function fetchImagePrompt(title, synopsis){
     temperature: 0.8,    
     max_tokens: 100    
   })
-  console.log(response.data.choices[0].text.trim())
+  const imagePrompt = response.data.choices[0].text.trim()
+  fetchImageUrl(imagePrompt)
 }
 
+async function fetchImageUrl(imagePrompt){
+  const response = await openai.createImage({
+    prompt: `${imagePrompt}, no text`,
+    nb: 1,
+    size: '512x512',
+    response_format: 'b64_json'
 
+  })
+  document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64, ${response.data.data[0].b64_json}">`
+}
