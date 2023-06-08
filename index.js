@@ -1,3 +1,6 @@
+const apiKey = "#####"
+const url = "https://api.openai.com/v1/completions"
+
 const setupTextarea = document.getElementById('setup-textarea') 
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
