@@ -1,4 +1,6 @@
-const apiKey = "#####"
+import { env } from "./env"
+
+const apiKey = env.openai.API_KEY
 const url = "https://api.openai.com/v1/completions"
 
 const setupTextarea = document.getElementById('setup-textarea') 
