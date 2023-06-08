@@ -55,8 +55,19 @@ async function fetchSynopsis(pitcherPrompt) {
     synopsis: `,
     max_tokens: 500
   })
-  movieBossText.innerText = response.data.choices[0].text.trim()
+  const synopsis = response.data.choices[0].text.trim()
+  movieBossText.innerText = synopsis
+  fetchTitle(synopsis)
 }
 
+async function fetchTitle(synopsis){
+  const response = await openai.createCompletion({
+    model: 'text-davinci-003',
+    prompt: `Generate a catchy movie title based on this ${synopsis}.`,
+    max_tokens: 16,
+    temperature: 0.7
+  })
+  document.getElementById('output-title').innerText = response.data.choices[0].text.trim()
+}
 
 
