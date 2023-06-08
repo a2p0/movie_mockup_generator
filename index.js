@@ -125,4 +125,11 @@ async function fetchImageUrl(imagePrompt){
 
   })
   document.getElementById('output-img-container').innerHTML = `<img src="data:image/png;base64, ${response.data.data[0].b64_json}">`
+
+  setupInputContainer.innerHTML = `<button id="view-pitch-btn" class="view-pitch-btn">View Pitch</button>`
+  document.getElementById('view-pitch-btn').addEventListener('click', ()=>{
+    document.getElementById('setup-container').style.display = 'none'
+    document.getElementById('output-container').style.display = 'flex'
+    movieBossText.innerText = `This idea is so good I'm jealous! It's gonna make you rich for sure! Remember, I want 10% 💰`
+  })
 }
