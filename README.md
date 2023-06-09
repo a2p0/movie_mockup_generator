@@ -1,21 +1,30 @@
-# co1ba4eccac7c70d3ba27a8e2
+# Movie Mockup Generator
 
-Quick start:
+## Quick start
 
 ```
 $ npm install
 $ npm start
-````
+```
 
-Head over to https://vitejs.dev/ to learn more about using vite
-## About Scrimba
+## Course
 
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Frontend Developer Career Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
+**Build AI apps with ChatGPT, Dall-E, GPT4. Week 1/3**
 
-- [Our courses](https://scrimba.com/allcourses)
-- [The Frontend Career Path](https://scrimba.com/learn/frontend)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
+Week 1/3 - Build a movie idea generator with ChatGPT and Dall-E
+By [Scrimba](https://scrimba.com/playlist/pnd36h9) on [Coursera](https://www.coursera.org/learn/build-ai-apps-with-chatgpt-dalle-gpt4/home/week/1)
 
-Happy Coding!
+
+## Achivements
+
+- Use of the OpenAI Api:
+    - text-davinci-003 model
+    - createCompletion enpoint
+    - createImage enpoint (Dall-E)
+    - max_token parameter
+    - temperature parameter
+- Prompt engineering:
+    - The zero shot approach
+    - The few shots approach
+
+
