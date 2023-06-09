@@ -12,16 +12,16 @@ const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
 
 document.getElementById("send-btn").addEventListener("click", () => {
-  const pitcherPrompt = setupTextarea.value
-  if (pitcherPrompt) {
+  const outline = setupTextarea.value
+  if (outline) {
     setupInputContainer.innerHTML = `<img src="images/loading.svg" class="loading" id="loading">`
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`
-    fetchBotReply(pitcherPrompt)
-    fetchSynopsis(pitcherPrompt)
+    fetchBotReply(outline)
+    fetchSynopsis(outline)
   }
 })
 
-async function fetchBotReply(pitcherPrompt) {
+async function fetchBotReply(outline) {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `Generate a short message to enthusiastically say a pitcher prompt sounds interesting and that you need some minutes to think about it.
@@ -35,7 +35,7 @@ async function fetchBotReply(pitcherPrompt) {
     pitcher_prompt: A group of corrupt lawyers try to send an innocent woman to jail.
     short_message: Wow that is awesome! Corrupt lawyers, huh? Give me a few moments to think!
     ###
-    pitcher_prompt: ${pitcherPrompt}
+    pitcher_prompt: ${outline}
     short_message: 
     `,
     max_tokens: 60
@@ -43,7 +43,7 @@ async function fetchBotReply(pitcherPrompt) {
   movieBossText.innerText = response.data.choices[0].text.trim()
 }
 
-async function fetchSynopsis(pitcherPrompt) {
+async function fetchSynopsis(outline) {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `Generate an engaging, professional and marketable movie synopsis based on a pitcher prompt. Also think about the best suitable actors for the roles you may mention in the synopsis and put the actor's name between parentheses rigth after the charachter name.
@@ -51,7 +51,7 @@ async function fetchSynopsis(pitcherPrompt) {
     pitcher_prompt: A big-headed daredevil fighter pilot goes back to school only to be sent on a deadly mission.
     synopsis: The Top Gun Naval Fighter Weapons School is where the best of the best train to refine their elite flying skills. When hotshot fighter pilot Maverick (Tom Cruise) is sent to the school, his reckless attitude and cocky demeanor put him at odds with the other pilots, especially the cool and collected Iceman (Val Kilmer). But Maverick isn't only competing to be the top fighter pilot, he's also fighting for the attention of his beautiful flight instructor, Charlotte Blackwood (Kelly McGillis). Maverick gradually earns the respect of his instructors and peers - and also the love of Charlotte, but struggles to balance his personal and professional life. As the pilots prepare for a mission against a foreign enemy, Maverick must confront his own demons and overcome the tragedies rooted deep in his past to become the best fighter pilot and return from the mission triumphant.
     ###
-    pitcher_prompt: ${pitcherPrompt}
+    pitcher_prompt: ${outline}
     synopsis: `,
     max_tokens: 500
   })
