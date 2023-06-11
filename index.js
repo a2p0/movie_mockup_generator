@@ -5,8 +5,8 @@ import { Configuration, OpenAIApi } from "openai"
 const configuration = new Configuration({
   apiKey: env.openai.API_KEY
 })
-
 delete configuration.baseOptions.headers['User-Agent'];
+
 const openai = new OpenAIApi(configuration)
 
 const setupTextarea = document.getElementById('setup-textarea') 
@@ -29,16 +29,16 @@ async function fetchBotReply(outline) {
     prompt: `Generate a short message to enthusiastically say a pitcher prompt sounds interesting and that you need some minutes to think about it.
     ###
     pitcher_prompt: Two dogs fall in love and move to Hawaii to learn to surf.
-    short_message: I'll need to think about that. But your idea is amazing! I love the bit about Hawaii!
+    short message: I'll need to think about that. But your idea is amazing! I love the bit about Hawaii!
     ###
     pitcher_prompt: A plane crashes in the jungle and the passengers have to walk 1000km to safety.
-    short_message: I'll spend a few moments considering that. But I love your idea!! A disaster movie in the jungle!
+    short message: I'll spend a few moments considering that. But I love your idea!! A disaster movie in the jungle!
     ###
     pitcher_prompt: A group of corrupt lawyers try to send an innocent woman to jail.
-    short_message: Wow that is awesome! Corrupt lawyers, huh? Give me a few moments to think!
+    short message: Wow that is awesome! Corrupt lawyers, huh? Give me a few moments to think!
     ###
     pitcher_prompt: ${outline}
-    short_message: 
+    short message: 
     `,
     max_tokens: 60
   })
@@ -78,10 +78,6 @@ async function fetchTitle(synopsis){
 async function fetchActors(synopsis){
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
-/*
-Challenge:
-    1. Use OpenAI to extra the names in brackets from our synopsis.
-*/
     prompt: `Extract the names in parentheses in the synopsis.
     ###
     synopsis: The Top Gun Naval Fighter Weapons School is where the best of the best train to refine their elite flying skills. When hotshot fighter pilot Maverick (Tom Cruise) is sent to the school, his reckless attitude and cocky demeanor put him at odds with the other pilots, especially the cool and collected Iceman (Val Kilmer). But Maverick isn't only competing to be the top fighter pilot, he's also fighting for the attention of his beautiful flight instructor, Charlotte Blackwood (Kelly McGillis). Maverick gradually earns the respect of his instructors and peers - and also the love of Charlotte, but struggles to balance his personal and professional life. As the pilots prepare for a mission against a foreign enemy, Maverick must confront his own demons and overcome the tragedies rooted deep in his past to become the best fighter pilot and return from the mission triumphant.
@@ -94,11 +90,12 @@ Challenge:
   })
   document.getElementById('output-stars').innerText = response.data.choices[0].text.trim()
 }
+
 async function fetchImagePrompt(title, synopsis){
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `
-    Write a image description for Dall-E to generate a advertising movie poster based on the title and the synopsis. Give the image the most suitable style based on the synopsis. The image should have rich visual details. 
+    Write an image description for Dall-E to generate a advertising movie poster based on the title and the synopsis. Give the image the most suitable style based on the synopsis. The image should have rich visual details. 
     ###
     title: Love's Time Warp
     synopsis: When scientist and time traveller Wendy (Emma Watson) is sent back to the 1920s to assassinate a future dictator, she never expected to fall in love with them. As Wendy infiltrates the dictator's inner circle, she soon finds herself torn between her mission and her growing feelings for the leader (Brie Larson). With the help of a mysterious stranger from the future (Josh Brolin), Wendy must decide whether to carry out her mission or follow her heart. But the choices she makes in the 1920s will have far-reaching consequences that reverberate through the ages.
@@ -121,7 +118,7 @@ async function fetchImagePrompt(title, synopsis){
 async function fetchImageUrl(imagePrompt){
   const response = await openai.createImage({
     prompt: `${imagePrompt}, no text`,
-    nb: 1,
+    n: 1,
     size: '512x512',
     response_format: 'b64_json'
 
