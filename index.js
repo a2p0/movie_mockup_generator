@@ -58,7 +58,8 @@ async function fetchSynopsis(outline) {
     max_tokens: 500
   })
   const synopsis = response.data.choices[0].text.trim()
-  movieBossText.innerText = synopsis
+  document.getElementById('output-text').innerText = synopsis
+
   fetchTitle(synopsis)
   fetchActors(synopsis)
 }
@@ -127,8 +128,9 @@ async function fetchImageUrl(imagePrompt){
 
   setupInputContainer.innerHTML = `<button id="view-pitch-btn" class="view-pitch-btn">View Pitch</button>`
   document.getElementById('view-pitch-btn').addEventListener('click', ()=>{
-    document.getElementById('setup-container').style.display = 'none'
-    document.getElementById('output-container').style.display = 'flex'
+    document.getElementById('view-pitch-btn').style.display = 'none'
     movieBossText.innerText = `This idea is so good I'm jealous! It's gonna make you rich for sure! Remember, I want 10% 💰`
+    
+    document.getElementById('output-container').style.display = 'flex'
   })
 }
