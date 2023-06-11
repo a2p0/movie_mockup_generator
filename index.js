@@ -5,6 +5,8 @@ import { Configuration, OpenAIApi } from "openai"
 const configuration = new Configuration({
   apiKey: env.openai.API_KEY
 })
+
+delete configuration.baseOptions.headers['User-Agent'];
 const openai = new OpenAIApi(configuration)
 
 const setupTextarea = document.getElementById('setup-textarea') 
